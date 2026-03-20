@@ -1,0 +1,47 @@
+# =============================================================================
+# LibreRun base_config.yaml — sample_project
+# =============================================================================
+
+# Section 0 — Flow Setup
+flow_setup:
+    librerun_version: v0.1.RC
+
+# Section 1 — Project Metadata
+project_configuration:
+    project_name: sample_project
+    author: your_name
+    description: Simple 4-bit counter RTL + SV testbench, LibreRun sample project
+
+# Section 2 — RTL Configuration
+rtl_configuration:
+    dut_top_module: counter
+    rtl_source_dirs: # []
+        - $PROJECT_ROOT/rtl:dut
+    rtl_manual_filelists: []
+        # - $PROJECT_ROOT/misc/rtl.f
+
+# Section 3 — TB Configuration
+tb_configuration:
+    tb_top_module: tb_counter
+    tb_source_files:
+        - $PROJECT_ROOT/tb/tb_counter.sv
+    tb_filelists: []
+    tb_include_dirs: []
+    info_keywords:
+        - "[TB] PASS"
+    warning_keywords: []
+    error_keywords:
+        - "[TB] FAIL"
+
+# Section 4 — Compile Options
+compile_options:
+    defines: []
+    verilator_flags: # []
+        # - "-Wno-DECLFILENAME"
+        - "-Wno-TIMESCALEMOD"
+
+# Section 5 — Simulation Options
+simulation_options:
+    persistent_plusargs: []
+    error_limit: 10
+    seed: 0
