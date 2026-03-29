@@ -4,7 +4,7 @@
 
 # Section 0 — Flow Setup
 flow_setup:
-    librerun_version: v0.2.RC
+    librerun_version: v0.3.RC
 
 # Section 1 — Project Metadata
 project_configuration:
@@ -47,6 +47,7 @@ compile_options:
 
 # Section 6 — Simulation Options
 simulation_options:
+    pre_run_script: $PROJECT_ROOT/scripts/pre_run_script/test_pre_run.sh
     persistent_plusargs: []
     error_limit: 10
     seed: 0
