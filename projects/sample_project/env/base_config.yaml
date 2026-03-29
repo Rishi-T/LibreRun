@@ -4,7 +4,7 @@
 
 # Section 0 — Flow Setup
 flow_setup:
-    librerun_version: v0.1.RC
+    librerun_version: v0.2.RC
 
 # Section 1 — Project Metadata
 project_configuration:
@@ -12,7 +12,12 @@ project_configuration:
     author: your_name
     description: Simple 4-bit counter RTL + SV testbench, LibreRun sample project
 
-# Section 2 — RTL Configuration
+# Section 2 — Tool Configuration
+tool_setup:
+    verilator_base_path: /tools/verilator
+    verilator_version: v5.046
+
+# Section 3 — RTL Configuration
 rtl_configuration:
     dut_top_module: counter
     rtl_source_dirs: # []
@@ -20,7 +25,7 @@ rtl_configuration:
     rtl_manual_filelists: []
         # - $PROJECT_ROOT/misc/rtl.f
 
-# Section 3 — TB Configuration
+# Section 4 — TB Configuration
 tb_configuration:
     tb_top_module: tb_counter
     tb_source_files:
@@ -33,14 +38,14 @@ tb_configuration:
     error_keywords:
         - "[TB] FAIL"
 
-# Section 4 — Compile Options
+# Section 5 — Compile Options
 compile_options:
     defines: []
     verilator_flags: # []
         # - "-Wno-DECLFILENAME"
         - "-Wno-TIMESCALEMOD"
 
-# Section 5 — Simulation Options
+# Section 6 — Simulation Options
 simulation_options:
     persistent_plusargs: []
     error_limit: 10
