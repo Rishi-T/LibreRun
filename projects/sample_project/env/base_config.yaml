@@ -4,7 +4,7 @@
 
 # Section 0 — Flow Setup
 flow_setup:
-    librerun_version: v0.3.RC
+    librerun_version: v0.4.RC
 
 # Section 1 — Project Metadata
 project_configuration:
@@ -33,10 +33,10 @@ tb_configuration:
     tb_filelists: []
     tb_include_dirs: []
     info_keywords:
-        - "[TB] PASS"
+        - "[PASS]"
     warning_keywords: []
     error_keywords:
-        - "[TB] FAIL"
+        - "[FAIL]"
 
 # Section 5 — Compile Options
 compile_options:
@@ -44,6 +44,12 @@ compile_options:
     verilator_flags: # []
         # - "-Wno-DECLFILENAME"
         - "-Wno-TIMESCALEMOD"
+        - "-Wall"
+    cflags:
+        - "-O3"
+        - "-flto=auto"
+        - "-march=native"
+        - "-fno-stack-protector"
 
 # Section 6 — Simulation Options
 simulation_options:
@@ -51,3 +57,58 @@ simulation_options:
     persistent_plusargs: []
     error_limit: 10
     seed: 0
+
+# Section 7 — Regress Options
+regression_options:
+    max_parallel: 20
+    keep_passing: false # Keep passing test directories (default: false)
+    keep_failing: true # Keep failing test directories (default: true)
+    generate_prs_logs: false
+    prs_per_test: true
+    prs_per_count: false
+
+# Section 8 — Regress Suites
+regression_suites:
+    quick:
+        default_count: 1
+        tests:
+            - smoke
+            - basic
+
+    all:
+        default_count: 8
+        tests:
+            - smoke
+            - basic
+            - wraparound:5
+            - stress:2
+            - load:3
+            - updown:3
+
+    long:
+        default_count: 1000
+        tests:
+            - smoke
+            - basic
+            - wraparound
+            - stress
+            - load
+            - updown
+
+    example:
+        default_count: 5
+        tests:
+            - smoke
+            - name: basic
+              variants:
+                  - suffix: "_fast"
+                    plusargs: ["FAST_MODE=1", "DELAY=50"] # No need for '+'s
+                    count: 10
+                  - suffix: "_slow"
+                    plusargs: ["FAST_MODE=0", "DELAY=200"] # No need for '+'s
+                    count: 10
+            - name: stress
+              count: 8
+              plusargs: ["DELAY=500"]
+            - load
+            - updown:7
